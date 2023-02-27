@@ -5,10 +5,12 @@ export interface ILoginRequestData {
   password: string
   /** 验证码 */
   code: string
+  captchaKey: string
+  remember?: boolean
 }
 
-export type LoginCodeResponseData = IApiResponseData<string>
+export type LoginCodeResponseData = IApiResponseData<{ captchaKey: string; dataBase64: string }>
 
 export type LoginResponseData = IApiResponseData<{ token: string }>
 
-export type UserInfoResponseData = IApiResponseData<{ username: string; roles: string[] }>
+export type UserInfoResponseData = IApiResponseData<{ loginName: string; roles: string[] }>

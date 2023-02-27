@@ -27,6 +27,8 @@ export const useUserStore = defineStore("user", () => {
       loginApi({
         username: loginData.username,
         password: loginData.password,
+        captchaKey: loginData.captchaKey,
+        remember: loginData.remember,
         code: loginData.code
       })
         .then((res) => {
@@ -45,7 +47,7 @@ export const useUserStore = defineStore("user", () => {
       getUserInfoApi()
         .then((res) => {
           roles.value = res.data.roles
-          username.value = res.data.username
+          username.value = res.data.loginName
           resolve(res)
         })
         .catch((error) => {

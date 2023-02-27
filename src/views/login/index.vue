@@ -1,3 +1,11 @@
+<!--
+ * @Author: Christer hongweibing3@gmail.com
+ * @Date: 2023-02-26 17:11:27
+ * @LastEditors: Christer hongweibing3@gmail.com
+ * @LastEditTime: 2023-02-26 19:29:31
+ * @FilePath: \vue3-admin-lesson\src\views\login\index.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <script lang="ts" setup>
 import { reactive, ref } from "vue"
 import { useRouter } from "vue-router"
@@ -18,7 +26,9 @@ const codeUrl = ref("")
 /** 登录表单数据 */
 const loginForm: ILoginRequestData = reactive({
   username: "admin",
-  password: "12345678",
+  password: "",
+  captchaKey: "",
+  remember: false,
   code: ""
 })
 /** 登录表单校验规则 */
@@ -39,6 +49,8 @@ const handleLogin = () => {
         .login({
           username: loginForm.username,
           password: loginForm.password,
+          captchaKey: loginForm.captchaKey,
+          remember: loginForm.remember,
           code: loginForm.code
         })
         .then(() => {
@@ -63,7 +75,8 @@ const createCode = () => {
   // 获取验证码
   codeUrl.value = ""
   getLoginCodeApi().then((res) => {
-    codeUrl.value = res.data
+    loginForm.captchaKey = res.data.captchaKey
+    codeUrl.value = res.data.dataBase64
   })
 }
 
@@ -122,6 +135,12 @@ createCode()
                 </el-image>
               </template>
             </el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-checkbox v-model="loginForm.remember">记住我</el-checkbox>
+            <template #append>
+              <el-link href="https://element-plus.org" target="_blank">注册</el-link>
+            </template>
           </el-form-item>
           <el-button :loading="loading" type="primary" size="large" @click.prevent="handleLogin"> 登 录 </el-button>
         </el-form>
