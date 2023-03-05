@@ -40,6 +40,13 @@ export const constantRoutes: RouteRecordRaw[] = [
     }
   },
   {
+    path: "/register",
+    component: () => import("@/views/register/index.vue"),
+    meta: {
+      hidden: true
+    }
+  },
+  {
     path: "/",
     component: Layout,
     redirect: "/dashboard",

@@ -2,7 +2,7 @@
  * @Author: Christer hongweibing3@gmail.com
  * @Date: 2023-02-26 17:11:27
  * @LastEditors: Christer hongweibing3@gmail.com
- * @LastEditTime: 2023-02-26 19:29:31
+ * @LastEditTime: 2023-03-05 22:12:12
  * @FilePath: \vue3-admin-lesson\src\views\login\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -138,9 +138,7 @@ createCode()
           </el-form-item>
           <el-form-item>
             <el-checkbox v-model="loginForm.remember">记住我</el-checkbox>
-            <template #append>
-              <el-link href="https://element-plus.org" target="_blank">注册</el-link>
-            </template>
+            <router-link class="el-link" to="/register">注册</router-link>
           </el-form-item>
           <el-button :loading="loading" type="primary" size="large" @click.prevent="handleLogin"> 登 录 </el-button>
         </el-form>
@@ -190,6 +188,9 @@ createCode()
           cursor: pointer;
           text-align: center;
         }
+      }
+      .el-link {
+        margin-left: 60%;
       }
       .el-button {
         width: 100%;
